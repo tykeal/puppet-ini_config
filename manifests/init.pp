@@ -19,7 +19,7 @@ define ini_config (
   Enum['present', 'absent'] $ensure,
   String $config_file      = '',
   Hash $config             = {},
-  Pattern[/^[0-7]{4}$/] $mode = '0440',
+  Pattern['^[0-7]{4}$'] $mode = '0440',
   String $owner            = 'root',
   String $group            = 'root',
   Boolean $quotesubsection = true,
