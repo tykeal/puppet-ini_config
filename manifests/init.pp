@@ -16,7 +16,7 @@
 # @License Apache-2.0 <http://spdx.org/licenses/Apache-2.0>
 #
 define ini_config (
-  Enum['present', 'absent'] $ensure,
+  Enum['present', 'absent'] $ensure = 'present',
   String $config_file      = '',
   Hash $config             = {},
   Pattern['^[0-7]{4}$'] $mode = '0440',

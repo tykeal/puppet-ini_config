@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe 'ini_config', :type => :define do
-  let (:params) {
+  let (:default_params) {
     {
       'ensure'            => 'present',
       'config_file'       => '',
@@ -21,10 +21,28 @@ describe 'ini_config', :type => :define do
     }
   }
 
-  context 'with good params' do
+  context 'with default params' do
     let(:title) { '/foo/test.config' }
 
+    it { should compile }
     it { should contain_ini_config(title) }
+    it { should contain_file(title).with(
+      :ensure  => 'file',
+      :owner   => 'root',
+      :group   => 'root',
+      :mode    => '0440',
+      :content => '; MANAGED BY PUPPET
+
+',
+    ) }
+  end
+
+  context 'with good params' do
+    let(:title) { '/foo/test.config' }
+    let(:params) do
+      default_params.merge({})
+    end
+
     it { should contain_file(title).with(
       :ensure  => 'file',
       :owner   => params['owner'],
@@ -92,6 +110,9 @@ testvar3 = testvar3
 
   context 'with bad title' do
     let(:title) { 'badtitle' }
+    let(:params) do
+      default_params.merge({})
+    end
 
     it "should throw an error if title and config_file do not have an absolute path" do
       expect { should compile }.to \
