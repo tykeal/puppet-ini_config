@@ -1,0 +1,33 @@
+; MANAGED BY PUPPET
+<%
+if @quotesubsection
+quote = '"'
+else
+quote = ''
+end
+
+if @indentoptions
+indent = '	'
+else
+indent = ''
+end
+-%>
+
+<% @config.sort.map do |section, var_hash| -%>
+<% if section.include? '.' -%>
+<% section_arr = section.split('.') -%>
+[<%= section_arr[0] %> <%= quote %><%= section_arr[1] %><%= quote %>]
+<% else -%>
+[<%= section %>]
+<% end -%>
+<% var_hash.sort.map do |var, val_or_arr| -%>
+<% if val_or_arr.is_a? Array -%>
+<% val_or_arr.each do |val| -%>
+<%= indent %><%= var %> = <%= val %>
+<% end -%>
+<% else -%>
+<%= indent %><%= var %> = <%= val_or_arr %>
+<% end -%>
+<% end -%>
+
+<% end -%>
