@@ -1,6 +1,6 @@
 {
   "name": "tykeal-ini_config",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "tykeal",
   "summary": "Control a complete inifile",
   "license": "Apache-2.0",
@@ -8,8 +8,30 @@
   "project_page": "https://github.com/tykeal/puppet-ini_config",
   "issues_url": "https://github.com/tykeal/puppet-ini_config/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+    {
+      "name":"puppetlabs-stdlib",
+      "version_requirement":">= 1.0.0 <5.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">=4.x <5.0.0"
+    }
   ],
   "data_provider": null
 }
-
