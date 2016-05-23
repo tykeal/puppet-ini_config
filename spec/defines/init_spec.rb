@@ -18,6 +18,7 @@ describe 'ini_config', :type => :define do
       'group'             => 'bar',
       'quotesubsection'   => true,
       'indentoptions'     => true,
+      'show_diff'         => true,
     }
   }
 
@@ -105,6 +106,13 @@ testvar3 = testvar3
         params.merge!({'ensure' => 'absent'})
         is_expected.to contain_file(title).with(
           :ensure => 'absent',
+        )
+      end
+
+      it "should have a config file with a hidden diff if show_diff is false" do
+        params.merge!({'show_diff' => false})
+        is_expected.to contain_file(title).with(
+          :show_diff => 'false',
         )
       end
     end

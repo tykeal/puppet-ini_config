@@ -146,6 +146,14 @@ Which will produce the following ini file
 
 		**Default**: `true`
 
+	* `show_diff`
+		Boolean to determine if the diff should be reported on a puppet
+        run that changes the file contents
+
+		**Type**: Boolean
+
+		**Default**: `true`
+
 ## Limitations
 
 While this module is flagged as only operating on RedHat and CentOS systems it

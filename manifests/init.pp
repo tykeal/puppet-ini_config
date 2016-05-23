@@ -60,6 +60,9 @@
 #   or not. Some applications using ini sytle configuration files can not handle
 #   leading white space
 #
+# @param show_diff If the diff should be reported on a puppet run that
+#   changes the file contents.
+#
 define ini_config (
   Enum['present', 'absent'] $ensure = 'present',
   String $config_file      = '',
@@ -69,6 +72,7 @@ define ini_config (
   String $group            = 'root',
   Boolean $quotesubsection = true,
   Boolean $indentoptions   = true,
+  Boolean $show_diff       = true,
 ) {
   # Our config file should be either $config_file or $title but it must be an
   # absolute_path
@@ -87,10 +91,11 @@ define ini_config (
   }
 
   file { $file_path:
-    ensure  => $_ensure,
-    owner   => $owner,
-    group   => $group,
-    mode    => $mode,
-    content => template("${module_name}/config.erb"),
+    ensure    => $_ensure,
+    owner     => $owner,
+    group     => $group,
+    mode      => $mode,
+    content   => template("${module_name}/config.erb"),
+    show_diff => $show_diff,
   }
 }
